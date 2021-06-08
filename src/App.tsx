@@ -1,8 +1,8 @@
-import SimpleName from "./components/SimpleName";
+import Counter from "./components/Counter";
 import "./App.css";
 
 function App() {
-  return <SimpleName />;
+  return <Counter />;
 }
 
 export default App;
