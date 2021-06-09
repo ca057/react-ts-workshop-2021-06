@@ -1,0 +1,12 @@
+.book__title {
+  margin-bottom: 8px;
+}
+
+.book__title span {
+  font-size: small;
+}
+
+.book__pages {
+  font-size: smaller;
+  margin-top: 0;
+}

@@ -1,6 +1,7 @@
 import SimpleName from "./components/SimpleName";
 import Counter from "./components/Counter";
 import BookList from "./components/BookList";
+import Book from "./components/Book";
 import "./App.css";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
       <Counter initialValue={0} />
       <Counter />
       <BookList />
+      <Book />
     </>
   );
 }
