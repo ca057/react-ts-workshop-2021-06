@@ -18,6 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-server": "npx bookmonkey-api",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
