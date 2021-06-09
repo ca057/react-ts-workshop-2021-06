@@ -28,7 +28,17 @@ function App() {
       <SimpleName />
       <Counter initialValue={0} />
       <Counter />
-      <BookFormBuildInValidation sendForm={(values) => console.log(values)} />
+      <BookFormBuildInValidation
+        title="Edit the book “Learning WebRTC”"
+        book={{
+          title: "Learning WebRTC",
+          isbn: "9781783983667",
+        }}
+        handleSubmit={(values) => console.log(values)}
+      />
+      <BookFormBuildInValidation
+        handleSubmit={(values) => console.log(values)}
+      />
       <BookList />
       {book && <Book book={book} />}
     </>

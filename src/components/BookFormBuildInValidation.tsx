@@ -8,13 +8,20 @@ const initialState = {
 };
 
 interface BookFormBuildInValidationProps {
-  sendForm: (values: typeof initialState) => void;
+  book?: {
+    title: string;
+    isbn: string;
+  };
+  title?: string;
+  handleSubmit: (values: typeof initialState) => void;
 }
 
 const BookFormBuildInValidation: React.FC<BookFormBuildInValidationProps> = ({
-  sendForm,
+  book,
+  handleSubmit,
+  title = "Create a new book",
 }) => {
-  const [values, setValues] = React.useState(initialState);
+  const [values, setValues] = React.useState(book ?? initialState);
 
   const createChangeHandler =
     (key: keyof typeof values) =>
@@ -25,16 +32,16 @@ const BookFormBuildInValidation: React.FC<BookFormBuildInValidationProps> = ({
       }));
     };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    sendForm({ ...values });
-    setValues(initialState);
+  const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.nativeEvent.preventDefault();
+    handleSubmit({ ...values });
+    setValues(initialState);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleOnSubmit}>
       <fieldset>
-        <legend>Create a new book</legend>
+        <legend>{title}</legend>
         <input
           type="text"
           placeholder="Title"
