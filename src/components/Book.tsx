@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
+
+import { Book as BookI } from "../domain/types";
+
 import "./Book.css";
 
-interface Book {
-  title: string | null;
-  subtitle: string | null;
-  numPages: number | null;
-}
-
-interface BookDisplayProps {
+interface BookProps {
   isbn: string;
 }
-const BookDisplay: React.FC<BookDisplayProps> = ({ isbn }) => {
-  const [book, setBook] = useState<Book>();
+const Book: React.FC<BookProps> = ({ isbn }) => {
+  const [book, setBook] = useState<BookI>();
 
   useEffect(() => {
     async function fetchBook() {
@@ -21,7 +18,7 @@ const BookDisplay: React.FC<BookDisplayProps> = ({ isbn }) => {
     }
 
     fetchBook();
-  }, []);
+  }, [isbn]);
 
   return book ? (
     <div>
@@ -35,4 +32,4 @@ const BookDisplay: React.FC<BookDisplayProps> = ({ isbn }) => {
   ) : null;
 };
 
-export default BookDisplay;
+export default Book;
