@@ -4,6 +4,7 @@ import SimpleName from "./components/SimpleName";
 import Counter from "./components/Counter";
 import BookList from "./components/BookList";
 import Book from "./components/Book";
+import BookFormBuildInValidation from "./components/BookFormBuildInValidation";
 import { Book as BookI } from "./domain/types";
 
 import "./App.css";
@@ -27,6 +28,7 @@ function App() {
       <SimpleName />
       <Counter initialValue={0} />
       <Counter />
+      <BookFormBuildInValidation sendForm={(values) => console.log(values)} />
       <BookList />
       {book && <Book book={book} />}
     </>
