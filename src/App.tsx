@@ -11,7 +11,7 @@ function App() {
       <Counter initialValue={0} />
       <Counter />
       <BookList />
-      <Book />
+      <Book isbn="9781783983667" />
     </>
   );
 }

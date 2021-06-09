@@ -7,9 +7,10 @@ interface Book {
   numPages: number | null;
 }
 
-const isbn = "9781783983667";
-
-const BookDisplay = () => {
+interface BookDisplayProps {
+  isbn: string;
+}
+const BookDisplay: React.FC<BookDisplayProps> = ({ isbn }) => {
   const [book, setBook] = useState<Book>();
 
   useEffect(() => {
