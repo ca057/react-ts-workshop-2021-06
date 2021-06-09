@@ -48,8 +48,7 @@ const BookFormBuildInValidation: React.FC<BookFormBuildInValidationProps> = ({
           value={values.isbn}
           onChange={createChangeHandler("isbn")}
           required
-          minLength={10}
-          maxLength={13}
+          pattern="((?:[\dX]{13})|(?:[\d\-X]{17})|(?:[\dX]{10})|(?:[\d\-X]{13}))" // taken from https://regexr.com/38pq9
         />
         <button>Submit</button>
       </fieldset>
