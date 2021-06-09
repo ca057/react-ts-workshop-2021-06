@@ -29,7 +29,9 @@ const Book: React.FC<BookProps> = ({ isbn }) => {
       </p>
       <p className="book__pages">{book.numPages} pages</p>
     </div>
-  ) : null;
+  ) : (
+    <p>Can’t display book with ISBN "{isbn}".</p>
+  );
 };
 
 export default Book;
