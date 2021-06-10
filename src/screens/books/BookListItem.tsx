@@ -1,10 +1,9 @@
-interface BookListItemProps {
-  title: string;
-  onClick: () => void;
-}
+import { Book } from "../../domain/types";
 
-const BookListItem: React.FC<BookListItemProps> = ({ title, onClick }) => {
-  return <li onClick={onClick}>{title}</li>;
+interface BookListItemProps extends Book {}
+
+const BookListItem: React.FC<BookListItemProps> = ({ title }) => {
+  return <li>{title}</li>;
 };
 
 export default BookListItem;
