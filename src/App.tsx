@@ -4,6 +4,7 @@ import Playground from "./screens/Playground";
 import Books from "./screens/books";
 
 import "./App.css";
+import BookDetails from "./screens/books/BookDetails";
 
 function App() {
   return (
@@ -17,8 +18,11 @@ function App() {
         <Route path="/playground">
           <Playground />
         </Route>
-        <Route path="/books">
+        <Route exact path="/books">
           <Books />
+        </Route>
+        <Route exact path="/books/:isbn">
+          <BookDetails />
         </Route>
       </Switch>
     </>
