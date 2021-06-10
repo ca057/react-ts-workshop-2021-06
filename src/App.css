@@ -11,3 +11,7 @@ nav a:not(:last-child)::after {
   content: "|";
   margin-left: 16px;
 }
+
+.activeNav {
+  font-weight: bold;
+}

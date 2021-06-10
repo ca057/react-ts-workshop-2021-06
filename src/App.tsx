@@ -1,4 +1,4 @@
-import { Switch, Route, Link, Redirect } from "react-router-dom";
+import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 
 import Playground from "./screens/Playground";
 import Books from "./screens/books";
@@ -10,8 +10,12 @@ function App() {
   return (
     <>
       <nav>
-        <Link to="/books">Books</Link>
-        <Link to="/playground">Playground</Link>
+        <NavLink activeClassName="activeNav" to="/books">
+          Books
+        </NavLink>
+        <NavLink activeClassName="activeNav" to="/playground">
+          Playground
+        </NavLink>
       </nav>
       <Switch>
         <Redirect exact path="/" to="/books" />
