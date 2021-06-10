@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import SimpleName from "../components/SimpleName";
 import Counter from "../components/Counter";
-import BookList from "../components/BookList";
 import BookListAlternative from "../components/BookListAlternative";
 import Book from "../components/Book";
 import BookFormBuildInValidation from "../components/BookFormBuildInValidation";
@@ -38,7 +37,6 @@ function Playground() {
       <BookFormBuildInValidation
         handleSubmit={(values) => console.log(values)}
       />
-      <BookList />
       <BookListAlternative />
       {book && <Book book={book} />}
     </>

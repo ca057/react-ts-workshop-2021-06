@@ -1,7 +1,7 @@
 import { Switch, Route, Link, Redirect } from "react-router-dom";
 
 import Playground from "./screens/Playground";
-import Books from "./screens/Books";
+import Books from "./screens/books";
 
 import "./App.css";
 
