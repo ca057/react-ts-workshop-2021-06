@@ -1,48 +1,26 @@
-import { useEffect, useState } from "react";
+import { Switch, Route, Link, Redirect } from "react-router-dom";
 
-import SimpleName from "./components/SimpleName";
-import Counter from "./components/Counter";
-import BookList from "./components/BookListAlternative";
-import BookListAlternative from "./components/BookListAlternative";
-import Book from "./components/Book";
-import BookFormBuildInValidation from "./components/BookFormBuildInValidation";
-import { Book as BookI } from "./domain/types";
+import Playground from "./screens/Playground";
+import Books from "./screens/Books";
 
 import "./App.css";
 
-const isbn = "9781783983667";
 function App() {
-  const [book, setBook] = useState<BookI>();
-
-  useEffect(() => {
-    async function fetchBook() {
-      const response = await fetch(`http://localhost:4730/books/${isbn}`);
-      const bookAsJson = await response.json();
-      setBook(bookAsJson);
-    }
-
-    fetchBook();
-  }, []);
-
   return (
     <>
-      <SimpleName />
-      <Counter initialValue={0} />
-      <Counter />
-      <BookFormBuildInValidation
-        title="Edit the book “Learning WebRTC”"
-        book={{
-          title: "Learning WebRTC",
-          isbn: "9781783983667",
-        }}
-        handleSubmit={(values) => console.log(values)}
-      />
-      <BookFormBuildInValidation
-        handleSubmit={(values) => console.log(values)}
-      />
-      <BookList />
-      <BookListAlternative />
-      {book && <Book book={book} />}
+      <nav>
+        <Link to="/books">Books</Link>
+        <Link to="/playground">Playground</Link>
+      </nav>
+      <Switch>
+        <Redirect exact path="/" to="/books" />
+        <Route path="/playground">
+          <Playground />
+        </Route>
+        <Route path="/books">
+          <Books />
+        </Route>
+      </Switch>
     </>
   );
 }

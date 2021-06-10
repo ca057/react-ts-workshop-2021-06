@@ -1,0 +1,13 @@
+nav {
+  padding: 8px 16px;
+  background-color: lightpink;
+}
+
+nav a:not(:last-child) {
+  margin-right: 16px;
+}
+
+nav a:not(:last-child)::after {
+  content: "|";
+  margin-left: 16px;
+}
