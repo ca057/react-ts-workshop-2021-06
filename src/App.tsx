@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 
 import SimpleName from "./components/SimpleName";
 import Counter from "./components/Counter";
-import BookList from "./components/BookList";
+import BookList from "./components/BookListAlternative";
+import BookListAlternative from "./components/BookListAlternative";
 import Book from "./components/Book";
 import BookFormBuildInValidation from "./components/BookFormBuildInValidation";
 import { Book as BookI } from "./domain/types";
@@ -40,6 +41,7 @@ function App() {
         handleSubmit={(values) => console.log(values)}
       />
       <BookList />
+      <BookListAlternative />
       {book && <Book book={book} />}
     </>
   );
