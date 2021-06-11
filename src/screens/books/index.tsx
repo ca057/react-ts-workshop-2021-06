@@ -1,34 +1,21 @@
+import { useEffect, useState } from "react";
+import { Book } from "../../domain/types";
 import BookList from "./BookList";
-const list = [
-  {
-    title: "A first Book",
-    isbn: "1",
-    price: "19.99€",
-    subtitle: "",
-    numPages: 0,
-  },
-  {
-    title: "Another awesome Book",
-    isbn: "2",
-    price: "29.99€",
-    subtitle: "",
-    numPages: 0,
-  },
-  {
-    title: "Learn React - the full book",
-    isbn: "3",
-    price: "39.99€",
-    subtitle: "",
-    numPages: 0,
-  },
-];
 
 function Books() {
-  return (
-    <>
-      <BookList items={list} />
-    </>
-  );
+  const [books, setBooks] = useState<Book[]>();
+
+  useEffect(() => {
+    async function fetchBooks() {
+      const response = await fetch("http://localhost:4730/books");
+      const booksAsJson = await response.json();
+      setBooks(booksAsJson);
+    }
+
+    fetchBooks();
+  }, []);
+
+  return <>{books ? <BookList items={books} /> : <p>Loading...</p>}</>;
 }
 
 export default Books;
