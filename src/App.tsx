@@ -2,9 +2,9 @@ import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 
 import Playground from "./screens/Playground";
 import Books from "./screens/books";
+import BookDetails from "./screens/book";
 
 import "./App.css";
-import BookDetails from "./screens/books/BookDetails";
 
 function App() {
   return (
