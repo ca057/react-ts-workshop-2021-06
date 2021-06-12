@@ -1,8 +1,8 @@
 import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 
 import Playground from "./screens/Playground";
-import Books from "./screens/books";
-import BookDetails from "./screens/book";
+import BooksScreen from "./screens/books";
+import BookScreen from "./screens/book";
 
 import "./App.css";
 
@@ -23,10 +23,13 @@ function App() {
           <Playground />
         </Route>
         <Route exact path="/books">
-          <Books />
+          <BooksScreen />
         </Route>
-        <Route exact path="/books/:isbn">
-          <BookDetails />
+        <Route path="/books/:isbn">
+          <BookScreen />
+        </Route>
+        <Route>
+          <p>Not Found</p>
         </Route>
       </Switch>
     </>
