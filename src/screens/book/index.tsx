@@ -3,6 +3,7 @@ import { Route, useRouteMatch, Link, useHistory } from "react-router-dom";
 
 import Book from "../../components/Book";
 import EditBook from "../../components/EditBook";
+import { useBooksActions } from "../../domain/booksContext";
 import useBook from "../../domain/useBook";
 
 const BookDetails: React.FC = () => {
@@ -13,6 +14,7 @@ const BookDetails: React.FC = () => {
   } = useRouteMatch<{ isbn: string }>();
   const { goBack } = useHistory();
   const book = useBook(isbn);
+  const { updateBook } = useBooksActions();
 
   if (!book) {
     return <p>Book not available.</p>;
@@ -21,7 +23,7 @@ const BookDetails: React.FC = () => {
   const handleSubmit: ComponentProps<typeof EditBook>["handleSubmit"] = (
     book
   ) => {
-    console.log(book);
+    updateBook(book);
     goBack();
   };
 
