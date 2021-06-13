@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
-import { useBooksSelectors } from "./booksContext";
+import { useSelector } from "react-redux";
 import { Book } from "./types";
+
+import { getBook } from "../store/selectors";
+import { RootState } from "../store";
 
 export const useFetchBook = (isbn: string) => {
   const [book, setBook] = useState<Book | null>(null);
@@ -19,9 +22,9 @@ export const useFetchBook = (isbn: string) => {
 };
 
 const useBook = (isbn: string): Book | null => {
-  const { getBook } = useBooksSelectors();
+  const book = useSelector<RootState, Book | null>(getBook(isbn));
 
-  return getBook(isbn);
+  return book;
 };
 
 export default useBook;
