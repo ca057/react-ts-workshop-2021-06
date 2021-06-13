@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
-import { Book } from "../../domain/types";
+import { useEffect } from "react";
+import { useBooksActions, useBooksSelectors } from "../../domain/booksContext";
 import BookList from "./BookList";
 
 function Books() {
-  const [books, setBooks] = useState<Book[]>();
+  const { addBooks } = useBooksActions();
+  const { getBooks } = useBooksSelectors();
+  const books = getBooks();
 
   useEffect(() => {
     async function fetchBooks() {
       const response = await fetch("http://localhost:4730/books");
       const booksAsJson = await response.json();
-      setBooks(booksAsJson);
+      addBooks(booksAsJson);
     }
 
     fetchBooks();

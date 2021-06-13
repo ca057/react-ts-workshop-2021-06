@@ -15,7 +15,7 @@ const BookDetails: React.FC = () => {
   const book = useBook(isbn);
 
   if (!book) {
-    return <p>Loading...</p>;
+    return <p>Book not available.</p>;
   }
 
   const handleSubmit: ComponentProps<typeof EditBook>["handleSubmit"] = (

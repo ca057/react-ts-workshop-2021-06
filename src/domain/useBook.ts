@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { useBooksSelectors } from "./booksContext";
 import { Book } from "./types";
 
-const useBook = (isbn: string) => {
+export const useFetchBook = (isbn: string) => {
   const [book, setBook] = useState<Book | null>(null);
 
   useEffect(() => {
@@ -15,6 +16,12 @@ const useBook = (isbn: string) => {
   }, [isbn]);
 
   return book;
+};
+
+const useBook = (isbn: string): Book | null => {
+  const { getBook } = useBooksSelectors();
+
+  return getBook(isbn);
 };
 
 export default useBook;
