@@ -1,7 +1,8 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import books from "./books";
 
 const rootReducer = combineReducers({
-  books: (state = []) => state,
+  books,
 });
 
 const store = configureStore({
