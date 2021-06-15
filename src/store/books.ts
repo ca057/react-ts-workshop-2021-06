@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Book } from "../domain/types";
 
 type AddBooksAction = PayloadAction<Book[]>;
@@ -7,6 +7,16 @@ type UpdateBookAction = PayloadAction<Book>;
 const initialState: { byId: { [isbn: string]: Book } } = {
   byId: {},
 };
+
+export const fetchBooks = createAsyncThunk<Book[], void>(
+  "books/fetchBooks",
+  async () => {
+    const response = await fetch("http://localhost:4730/books");
+    const books = await response.json();
+
+    return books;
+  }
+);
 
 const booksSlice = createSlice({
   name: "books",
@@ -32,6 +42,22 @@ const booksSlice = createSlice({
         ...action.payload,
       };
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchBooks.fulfilled, (state, action) => {
+      state.byId = action.payload.reduce(
+        (allBooks, book) => {
+          if (state.byId[book.isbn]) {
+            return allBooks; // don’t overwrite books we already have
+          }
+          return {
+            ...allBooks,
+            [book.isbn]: book,
+          };
+        },
+        { ...state.byId }
+      );
+    });
   },
 });
 
