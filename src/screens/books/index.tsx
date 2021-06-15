@@ -1,18 +1,19 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Book } from "../../domain/types";
+import { RootState } from "../../store";
 import { addBooks } from "../../store/books";
+import { getBooks } from "../../store/selectors";
 import BookList from "./BookList";
 
 function Books() {
-  const [books, setBooks] = useState<Book[]>();
   const dispatch = useDispatch();
+  const books = useSelector<RootState, Book[]>(getBooks);
 
   useEffect(() => {
     async function fetchBooks() {
       const response = await fetch("http://localhost:4730/books");
       const booksAsJson = await response.json();
-      setBooks(booksAsJson);
       dispatch(addBooks(booksAsJson));
     }
 

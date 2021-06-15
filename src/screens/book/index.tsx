@@ -1,9 +1,12 @@
 import { ComponentProps } from "react";
+import { useSelector } from "react-redux";
 import { Route, useRouteMatch, Link, useHistory } from "react-router-dom";
 
-import Book from "../../components/Book";
+import BookDisplay from "../../components/Book";
 import EditBook from "../../components/EditBook";
-import useBook from "../../domain/useBook";
+import { Book } from "../../domain/types";
+import { RootState } from "../../store";
+import { getBook } from "../../store/selectors";
 
 const BookDetails: React.FC = () => {
   const {
@@ -12,7 +15,7 @@ const BookDetails: React.FC = () => {
     url,
   } = useRouteMatch<{ isbn: string }>();
   const { goBack } = useHistory();
-  const book = useBook(isbn);
+  const book = useSelector<RootState, Book | undefined>(getBook(isbn));
 
   if (!book) {
     return <p>Loading...</p>;
@@ -28,7 +31,7 @@ const BookDetails: React.FC = () => {
   return (
     <>
       <Route exact path={path}>
-        <Book book={book} />
+        <BookDisplay book={book} />
         <Link to={`${url}/edit`}>Edit</Link>
       </Route>
       <Route exact path={`${path}/edit`}>
