@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Book } from "../domain/types";
+import BookPreview from "./Book";
+import FancyButton from "./FancyButton";
 
-const initialState: Book = {
+const initialState: Book & { comment: string } = {
   title: "",
   isbn: "",
   subtitle: "",
   numPages: 0,
+  comment: "",
 };
 
 interface EditBookProps {
   book?: Book;
-  handleSubmit: (values: typeof initialState) => void;
+  handleSubmit: (values: Book) => void;
 }
 
 const EditBook: React.FC<EditBookProps> = ({ book, handleSubmit }) => {
-  const [values, setValues] = React.useState(book ?? initialState);
+  const [values, setValues] = React.useState(
+    book ? { ...book, comment: "" } : initialState
+  );
+  const { isbn, numPages, subtitle, title } = values;
 
   const createChangeHandler =
     (key: keyof typeof values) =>
@@ -25,48 +31,60 @@ const EditBook: React.FC<EditBookProps> = ({ book, handleSubmit }) => {
       }));
     };
 
-  const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.nativeEvent.preventDefault();
-    handleSubmit({ ...values });
-  };
+  const handleOnSubmit = useCallback(() => {
+    handleSubmit({ isbn, numPages, subtitle, title });
+  }, [handleSubmit, isbn, numPages, subtitle, title]);
 
   return (
-    <form onSubmit={handleOnSubmit}>
-      <fieldset>
-        <legend>Edit</legend>
-        <input
-          type="text"
-          placeholder="Title"
-          required
-          value={values.title}
-          onChange={createChangeHandler("title")}
-        />
-        <input
-          type="subtitle"
-          placeholder="Subtitle"
-          required
-          value={values.subtitle}
-          onChange={createChangeHandler("subtitle")}
-        />
-        <input
-          type="text"
-          placeholder="ISBN"
-          value={values.isbn}
-          onChange={createChangeHandler("isbn")}
-          required
-          pattern="((?:[\dX]{13})|(?:[\d\-X]{17})|(?:[\dX]{10})|(?:[\d\-X]{13}))" // taken from https://regexr.com/38pq9
-        />
-        <input
-          type="number"
-          placeholder="Number of pages"
-          required
-          value={values.numPages}
-          minLength={0}
-          onChange={createChangeHandler("numPages")}
-        />
-        <button>Submit changes</button>
-      </fieldset>
-    </form>
+    <div className="row">
+      <div>
+        <fieldset>
+          <legend>Edit</legend>
+          <input
+            type="text"
+            placeholder="Title"
+            required
+            value={values.title}
+            onChange={createChangeHandler("title")}
+          />
+          <input
+            type="subtitle"
+            placeholder="Subtitle"
+            required
+            value={values.subtitle}
+            onChange={createChangeHandler("subtitle")}
+          />
+          <input
+            type="text"
+            placeholder="ISBN"
+            value={values.isbn}
+            onChange={createChangeHandler("isbn")}
+            required
+            pattern="((?:[\dX]{13})|(?:[\d\-X]{17})|(?:[\dX]{10})|(?:[\d\-X]{13}))" // taken from https://regexr.com/38pq9
+          />
+          <input
+            type="number"
+            placeholder="Number of pages"
+            required
+            value={values.numPages}
+            minLength={0}
+            onChange={createChangeHandler("numPages")}
+          />
+          <input
+            type="text"
+            placeholder="Comment"
+            required
+            value={values.comment}
+            minLength={0}
+            onChange={createChangeHandler("comment")}
+          />
+          <FancyButton type="submit" onClick={handleOnSubmit}>
+            Submit changes
+          </FancyButton>
+        </fieldset>
+      </div>
+      <BookPreview book={values} style={{ backgroundColor: "lightpink" }} />
+    </div>
   );
 };
 

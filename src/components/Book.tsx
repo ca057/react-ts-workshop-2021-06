@@ -1,13 +1,17 @@
 import { Book as BookI } from "../domain/types";
+import { expensivePublicKey } from "../utils";
 
 import "./Book.css";
 
 interface BookProps {
   book: BookI;
+  style?: React.CSSProperties;
 }
-const Book: React.FC<BookProps> = ({ book }) => {
+const Book: React.FC<BookProps> = ({ book, style }) => {
+  // expensivePublicKey();
+
   return (
-    <div>
+    <div style={style || {}}>
       <p className="book__title">
         {book.title}
         <br />

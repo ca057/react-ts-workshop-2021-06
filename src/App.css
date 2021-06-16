@@ -15,3 +15,8 @@ nav a:not(:last-child)::after {
 .activeNav {
   font-weight: bold;
 }
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
