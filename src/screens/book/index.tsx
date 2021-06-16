@@ -1,4 +1,4 @@
-import { ComponentProps, useCallback } from "react";
+import { ComponentProps } from "react";
 import { useDispatch } from "react-redux";
 import { Route, useRouteMatch, Link, useHistory } from "react-router-dom";
 
@@ -17,14 +17,12 @@ const BookDetails: React.FC = () => {
   const book = useBook(isbn);
   const dispatch = useDispatch();
 
-  const handleSubmit: ComponentProps<typeof EditBook>["handleSubmit"] =
-    useCallback(
-      (book) => {
-        dispatch(updateBook(book));
-        // goBack();
-      },
-      [dispatch]
-    );
+  const handleSubmit: ComponentProps<typeof EditBook>["handleSubmit"] = (
+    book
+  ) => {
+    dispatch(updateBook(book));
+    // goBack();
+  };
 
   if (!book) {
     return <p>Book not available.</p>;

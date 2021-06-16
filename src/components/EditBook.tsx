@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { Book } from "../domain/types";
 import BookPreview from "./Book";
 import FancyButton from "./FancyButton";
@@ -31,9 +31,9 @@ const EditBook: React.FC<EditBookProps> = ({ book, handleSubmit }) => {
       }));
     };
 
-  const handleOnSubmit = useCallback(() => {
+  const handleOnSubmit = () => {
     handleSubmit({ isbn, numPages, subtitle, title });
-  }, [handleSubmit, isbn, numPages, subtitle, title]);
+  };
 
   return (
     <div className="row">
