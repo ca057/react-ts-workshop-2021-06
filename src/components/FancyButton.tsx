@@ -6,18 +6,16 @@ interface FancyButtonProps {
   type?: "submit" | "button";
 }
 
-const FancyButton: React.FC<FancyButtonProps> = ({
-  children,
-  onClick,
-  type = "button",
-}) => {
-  // expensivePublicKey();
+const FancyButton: React.FC<FancyButtonProps> = React.memo(
+  ({ children, onClick, type = "button" }) => {
+    expensivePublicKey();
 
-  return (
-    <button onClick={onClick} type={type}>
-      {children}
-    </button>
-  );
-};
+    return (
+      <button onClick={onClick} type={type}>
+        {children}
+      </button>
+    );
+  }
+);
 
 export default FancyButton;

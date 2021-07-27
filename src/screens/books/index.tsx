@@ -8,7 +8,7 @@ import { getBooks } from "../../store/selectors";
 
 import BookList from "./BookList";
 
-function Books() {
+function IsbnList() {
   const dispatch = useDispatch();
   const books = useSelector<RootState, Book[]>(getBooks());
 
@@ -18,7 +18,7 @@ function Books() {
     dispatch(fetchBooks());
   }, [books.length, dispatch]);
 
-  return <>{books ? <BookList items={books} /> : <p>Loading...</p>}</>;
+  return books ? <BookList items={books} /> : <p>Loading...</p>;
 }
 
 export default Books;

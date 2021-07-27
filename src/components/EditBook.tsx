@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import { Book } from "../domain/types";
 import BookPreview from "./Book";
 import FancyButton from "./FancyButton";
@@ -31,9 +31,19 @@ const EditBook: React.FC<EditBookProps> = ({ book, handleSubmit }) => {
       }));
     };
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = useCallback(() => {
     handleSubmit({ isbn, numPages, subtitle, title });
-  };
+  }, [handleSubmit, isbn, numPages, subtitle, title]);
+
+  const style = useMemo(
+    () => ({
+      backgroundColor: values.comment === "super" ? "red" : "lightblue",
+    }),
+    [values.comment]
+  );
+  const styleRef = useRef({
+    backgroundColor: "lightblue",
+  }).current;
 
   return (
     <div className="row">
@@ -78,12 +88,17 @@ const EditBook: React.FC<EditBookProps> = ({ book, handleSubmit }) => {
             minLength={0}
             onChange={createChangeHandler("comment")}
           />
-          <FancyButton type="submit" onClick={handleOnSubmit}>
-            Submit changes
-          </FancyButton>
         </fieldset>
+        <FancyButton type="submit" onClick={handleOnSubmit}>
+          Submit changes
+        </FancyButton>
       </div>
-      <BookPreview book={values} style={{ backgroundColor: "lightpink" }} />
+      <BookPreview
+        title={title}
+        subtitle={subtitle}
+        numPages={numPages}
+        style={style}
+      />
     </div>
   );
 };

@@ -38,7 +38,7 @@ function Playground() {
         handleSubmit={(values) => console.log(values)}
       />
       <BookListAlternative />
-      {book && <Book book={book} />}
+      {/* {book && <Book book={book} />} */}
     </>
   );
 }

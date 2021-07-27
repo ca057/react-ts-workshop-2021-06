@@ -1,4 +1,4 @@
-const name: string  = "Buzz Aldrin"
+const name: string = "Buzz Aldrin"
 
 function SimpleName() {
   return <p>

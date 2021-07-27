@@ -3,23 +3,27 @@ import { expensivePublicKey } from "../utils";
 
 import "./Book.css";
 
-interface BookProps {
-  book: BookI;
+interface BookProps extends Omit<BookI, "isbn"> {
   style?: React.CSSProperties;
 }
-const Book: React.FC<BookProps> = ({ book, style }) => {
-  // expensivePublicKey();
+const BookPreview: React.FC<BookProps> = ({
+  title,
+  subtitle,
+  numPages,
+  style,
+}) => {
+  expensivePublicKey();
 
   return (
     <div style={style || {}}>
       <p className="book__title">
-        {book.title}
+        {title}
         <br />
-        <span>{book.subtitle}</span>
+        <span>{subtitle}</span>
       </p>
-      <p className="book__pages">{book.numPages} pages</p>
+      <p className="book__pages">{numPages} pages</p>
     </div>
   );
 };
 
-export default Book;
+export default BookPreview;

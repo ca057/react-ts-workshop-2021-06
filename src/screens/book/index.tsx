@@ -20,7 +20,8 @@ const BookDetails: React.FC = () => {
   const handleSubmit: ComponentProps<typeof EditBook>["handleSubmit"] = (
     book
   ) => {
-    dispatch(updateBook(book));
+    // dispatch(updateBook(book));
+    console.log(book);
     // goBack();
   };
 
@@ -31,7 +32,7 @@ const BookDetails: React.FC = () => {
   return (
     <>
       <Route exact path={path}>
-        <Book book={book} />
+        <Book {...book} />
         <Link to={`${url}/edit`}>Edit</Link>
       </Route>
       <Route exact path={`${path}/edit`}>
